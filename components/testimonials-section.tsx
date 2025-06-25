@@ -25,7 +25,7 @@ export function TestimonialsSection() {
 
   const testimonials = [
     {
-      name: "Orlando BLoom",
+      name: "Orlando Bloom",
       role: "Manager, abc company",
       avatar: "/placeholder.svg?height=60&width=60",
       rating: 4,
@@ -94,9 +94,6 @@ export function TestimonialsSection() {
                 </p>
                 <div className="flex items-center justify-center space-x-3">
                   <Avatar className="hover:scale-110 transition-transform duration-300">
-                    <AvatarImage
-                      src={testimonial.avatar || "/placeholder.svg"}
-                    />
                     <AvatarFallback className="bg-gradient-to-br from-slate-100 to-slate-200">
                       {testimonial.name
                         .split(" ")

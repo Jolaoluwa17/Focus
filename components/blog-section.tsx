@@ -1,54 +1,28 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import { Calendar, User } from "lucide-react"
-import { useEffect, useState } from "react"
+import Image from "next/image";
+import { Calendar, User } from "lucide-react";
+import { useEffect, useState } from "react";
+import { posts } from "@/utils/posts";
 
 export function BlogSection() {
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true)
+          setIsVisible(true);
         }
       },
-      { threshold: 0.1 },
-    )
+      { threshold: 0.1 }
+    );
 
-    const element = document.getElementById("blog-section")
-    if (element) observer.observe(element)
+    const element = document.getElementById("blog-section");
+    if (element) observer.observe(element);
 
-    return () => observer.disconnect()
-  }, [])
-
-  const posts = [
-    {
-      title: "Nunc In Ipsum Vel Nisl Laoreet",
-      excerpt:
-        "Vivamus pellentesque luctus urna, non consectetur est tincidunt vitae. Aliquam in facilibus neque. Morbi mollis mauris sem, ut...",
-      image: "/blog/blog.jpg?height=300&width=400",
-      date: "Jun 07, 2023",
-      author: "Hint Websolution",
-    },
-    {
-      title: "Maecenas Bibendum Elementum Ante",
-      excerpt:
-        "Ut vitae nisl neque. Proin quis leo iaculis, placerat lectus a, aliquet ante. Pellentesque eget tincidunt dui. Sed...",
-      image: "/blog/blog2.jpg?height=300&width=400",
-      date: "Jun 07, 2023",
-      author: "Hint Websolution",
-    },
-    {
-      title: "Viverra Ex Magna A Augue",
-      excerpt:
-        "Etiam hendrerit turpis et magna faucibus bibendum. Integer imperdiet risus vitae est rutrum pretium. Cras convallis nibh ut...",
-      image: "/blog/blog1.jpg?height=300&width=400",
-      date: "Jun 07, 2023",
-      author: "Hint Websolution",
-    },
-  ]
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section id="blog-section" className="py-16 bg-gray-50 overflow-hidden">
@@ -65,7 +39,9 @@ export function BlogSection() {
             <article
               key={index}
               className={`bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-700 transform hover:scale-105 hover:-translate-y-2 group cursor-pointer ${
-                isVisible ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0"
+                isVisible
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-20 opacity-0"
               }`}
               style={{
                 transitionDelay: `${index * 200}ms`,
@@ -101,5 +77,5 @@ export function BlogSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

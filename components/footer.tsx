@@ -170,7 +170,7 @@ export function Footer() {
             © 2025, focus-fashion Powered by Jolaoluwa
           </p>
           <div className="flex items-center space-x-4">
-            <div className="flex space-x-2">
+            <div className="hidden sm:flex space-x-2">
               {["VISA", "MC", "AE", "PP"].map((card, index) => (
                 <div
                   key={card}

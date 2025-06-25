@@ -1,46 +1,59 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Separator } from "@/components/ui/separator"
-import { ShoppingBag, Truck, Store, Search, Lock, HelpCircle } from "lucide-react"
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
+import {
+  ShoppingBag,
+  Truck,
+  Store,
+  Search,
+  Lock,
+  HelpCircle,
+} from "lucide-react";
 
 interface CheckoutItem {
-  id: string
-  name: string
-  price: number
-  image: string
-  color: string
-  size: string
-  quantity: number
+  id: string;
+  name: string;
+  price: number;
+  image: string;
+  color: string;
+  size: string;
+  quantity: number;
 }
 
 export function CheckoutContent() {
-  const [email, setEmail] = useState("")
-  const [emailOffers, setEmailOffers] = useState(false)
-  const [deliveryMethod, setDeliveryMethod] = useState("ship")
-  const [country, setCountry] = useState("United Kingdom")
-  const [firstName, setFirstName] = useState("")
-  const [lastName, setLastName] = useState("")
-  const [address, setAddress] = useState("")
-  const [apartment, setApartment] = useState("")
-  const [city, setCity] = useState("")
-  const [postcode, setPostcode] = useState("")
-  const [saveInfo, setSaveInfo] = useState(false)
-  const [giftCard, setGiftCard] = useState("")
+  const [email, setEmail] = useState("");
+  const [emailOffers, setEmailOffers] = useState(false);
+  const [deliveryMethod, setDeliveryMethod] = useState("ship");
+  const [country, setCountry] = useState("United Kingdom");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [address, setAddress] = useState("");
+  const [apartment, setApartment] = useState("");
+  const [city, setCity] = useState("");
+  const [postcode, setPostcode] = useState("");
+  const [saveInfo, setSaveInfo] = useState(false);
+  const [giftCard, setGiftCard] = useState("");
 
   // Payment form states
-  const [paymentMethod, setPaymentMethod] = useState("credit-card")
-  const [cardNumber, setCardNumber] = useState("")
-  const [expirationDate, setExpirationDate] = useState("")
-  const [securityCode, setSecurityCode] = useState("")
-  const [nameOnCard, setNameOnCard] = useState("")
-  const [useSameAddress, setUseSameAddress] = useState(true)
+  const [paymentMethod, setPaymentMethod] = useState("credit-card");
+  const [cardNumber, setCardNumber] = useState("");
+  const [expirationDate, setExpirationDate] = useState("");
+  const [securityCode, setSecurityCode] = useState("");
+  const [nameOnCard, setNameOnCard] = useState("");
+  const [useSameAddress, setUseSameAddress] = useState(true);
 
   const checkoutItems: CheckoutItem[] = [
     {
@@ -61,11 +74,14 @@ export function CheckoutContent() {
       size: "XL",
       quantity: 1,
     },
-  ]
+  ];
 
-  const subtotal = checkoutItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
-  const shipping = 0 // Free shipping
-  const total = subtotal + shipping
+  const subtotal = checkoutItems.reduce(
+    (sum: number, item) => sum + item.price * item.quantity,
+    0
+  );
+  const shipping: number = 0;
+  const total = subtotal + shipping;
 
   return (
     <div className="min-h-screen bg-white">
@@ -96,8 +112,11 @@ export function CheckoutContent() {
             <div>
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-semibold text-gray-900">Contact</h2>
-                <Link href="/login" className="text-sm text-blue-600 hover:text-blue-700">
-                  Log in
+                <Link
+                  href="/"
+                  className="text-sm text-blue-600 hover:text-blue-700"
+                >
+                  Home
                 </Link>
               </div>
               <div className="space-y-4">
@@ -122,11 +141,15 @@ export function CheckoutContent() {
 
             {/* Delivery Method */}
             <div>
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Delivery</h2>
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">
+                Delivery
+              </h2>
               <div className="space-y-3">
                 <div
                   className={`border rounded-lg p-4 cursor-pointer transition-colors ${
-                    deliveryMethod === "ship" ? "border-black bg-gray-50" : "border-gray-300"
+                    deliveryMethod === "ship"
+                      ? "border-black bg-gray-50"
+                      : "border-gray-300"
                   }`}
                   onClick={() => setDeliveryMethod("ship")}
                 >
@@ -147,7 +170,9 @@ export function CheckoutContent() {
 
                 <div
                   className={`border rounded-lg p-4 cursor-pointer transition-colors ${
-                    deliveryMethod === "pickup" ? "border-black bg-gray-50" : "border-gray-300"
+                    deliveryMethod === "pickup"
+                      ? "border-black bg-gray-50"
+                      : "border-gray-300"
                   }`}
                   onClick={() => setDeliveryMethod("pickup")}
                 >
@@ -176,8 +201,12 @@ export function CheckoutContent() {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="United Kingdom">United Kingdom</SelectItem>
-                        <SelectItem value="United States">United States</SelectItem>
+                        <SelectItem value="United Kingdom">
+                          United Kingdom
+                        </SelectItem>
+                        <SelectItem value="United States">
+                          United States
+                        </SelectItem>
                         <SelectItem value="Canada">Canada</SelectItem>
                         <SelectItem value="Australia">Australia</SelectItem>
                       </SelectContent>
@@ -193,12 +222,20 @@ export function CheckoutContent() {
                       />
                     </div>
                     <div>
-                      <Input placeholder="Last name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                      <Input
+                        placeholder="Last name"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                      />
                     </div>
                   </div>
 
                   <div className="relative">
-                    <Input placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} />
+                    <Input
+                      placeholder="Address"
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                    />
                     <Search className="absolute right-3 top-3 h-4 w-4 text-gray-400" />
                   </div>
 
@@ -209,8 +246,16 @@ export function CheckoutContent() {
                   />
 
                   <div className="grid grid-cols-2 gap-4">
-                    <Input placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} />
-                    <Input placeholder="Postcode" value={postcode} onChange={(e) => setPostcode(e.target.value)} />
+                    <Input
+                      placeholder="City"
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
+                    />
+                    <Input
+                      placeholder="Postcode"
+                      value={postcode}
+                      onChange={(e) => setPostcode(e.target.value)}
+                    />
                   </div>
 
                   <label className="flex items-center space-x-2 text-sm">
@@ -228,7 +273,9 @@ export function CheckoutContent() {
 
             {/* Shipping Method */}
             <div>
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Shipping method</h2>
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">
+                Shipping method
+              </h2>
               <div className="text-sm text-gray-600 bg-gray-50 p-4 rounded-lg">
                 Enter your shipping address to view available shipping methods.
               </div>
@@ -236,14 +283,20 @@ export function CheckoutContent() {
 
             {/* Payment Section */}
             <div>
-              <h2 className="text-xl font-semibold text-gray-900 mb-2">Payment</h2>
-              <p className="text-sm text-gray-600 mb-6">All transactions are secure and encrypted.</p>
+              <h2 className="text-xl font-semibold text-gray-900 mb-2">
+                Payment
+              </h2>
+              <p className="text-sm text-gray-600 mb-6">
+                All transactions are secure and encrypted.
+              </p>
 
               <div className="space-y-4">
                 {/* Payment Method Selection */}
                 <div
                   className={`border rounded-lg p-4 cursor-pointer transition-colors ${
-                    paymentMethod === "credit-card" ? "border-black bg-gray-50" : "border-gray-300"
+                    paymentMethod === "credit-card"
+                      ? "border-black bg-gray-50"
+                      : "border-gray-300"
                   }`}
                   onClick={() => setPaymentMethod("credit-card")}
                 >
@@ -316,13 +369,17 @@ export function CheckoutContent() {
             </div>
 
             {/* Pay Now Button */}
-            <Button className="w-full bg-black text-white hover:bg-gray-800 py-4 text-lg font-medium">Pay now</Button>
+            <Button className="w-full bg-black text-white hover:bg-gray-800 py-4 text-lg font-medium">
+              Pay now
+            </Button>
           </div>
 
           {/* Right Column - Order Summary */}
           <div className="lg:pl-8">
             <div className="bg-gray-50 rounded-lg p-6 sticky top-4">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">Order summary</h2>
+              <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                Order summary
+              </h2>
 
               {/* Order Items */}
               <div className="space-y-4 mb-6">
@@ -347,7 +404,9 @@ export function CheckoutContent() {
                       </p>
                     </div>
                     <div className="text-right">
-                      <p className="font-medium">£{(item.price * item.quantity).toFixed(2)}</p>
+                      <p className="font-medium">
+                        £{(item.price * item.quantity).toFixed(2)}
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -376,7 +435,11 @@ export function CheckoutContent() {
                 </div>
                 <div className="flex justify-between">
                   <span>Shipping</span>
-                  <span>{shipping === 0 ? "Enter shipping address" : `£${shipping.toFixed(2)}`}</span>
+                  <span>
+                    {shipping === 0
+                      ? "Enter shipping address"
+                      : `£${shipping.toFixed(2)}`}
+                  </span>
                 </div>
               </div>
 
@@ -385,7 +448,10 @@ export function CheckoutContent() {
               <div className="flex justify-between text-xl font-bold">
                 <span>Total</span>
                 <span>
-                  <span className="text-sm font-normal text-gray-600 mr-2">GBP</span>£{total.toFixed(2)}
+                  <span className="text-sm font-normal text-gray-600 mr-2">
+                    GBP
+                  </span>
+                  £{total.toFixed(2)}
                 </span>
               </div>
             </div>
@@ -394,7 +460,9 @@ export function CheckoutContent() {
       </div>
 
       {/* Footer */}
-      <footer className="text-center py-6 text-sm text-gray-500 border-t">All rights reserved hint-fashion</footer>
+      <footer className="text-center py-6 text-sm text-gray-500 border-t">
+        All rights reserved Jolaoluwa
+      </footer>
     </div>
-  )
+  );
 }

@@ -1,70 +1,8 @@
-import Link from "next/link"
-import Image from "next/image"
-import { Calendar, User, MessageCircle } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
-
-interface NewsArticle {
-  id: string
-  title: string
-  excerpt: string
-  image: string
-  categories: string[]
-  author: string
-  date: string
-  comments: number
-  slug: string
-}
-
-const newsArticles: NewsArticle[] = [
-  {
-    id: "1",
-    title: "Nunc In Ipsum Vel Nisl Laoreet",
-    excerpt:
-      "Vivamus pellentesque luctus urna, non consectetur est tincidunt vitae. Aliquam in facilisis neque. Morbi mollis mauris sem, ut porta justo posuere ut. Pellentesque malesuada faucibus lacus nec tincidunt. Vestibulum ornare nunc a ex ullamcorper elementum. Nunc in ipsum vel nisl...",
-    image: "/blog/blog.jpg?height=400&width=600",
-    categories: ["BLOG", "HINT", "KIDS", "WOMEN"],
-    author: "Hint Websolution",
-    date: "June 7, 2023",
-    comments: 0,
-    slug: "nunc-in-ipsum-vel-nisl-laoreet",
-  },
-  {
-    id: "2",
-    title: "Maecenas Bibendum Elementum Ante",
-    excerpt:
-      "Ut vitae nisl neque. Proin quis leo iaculis, placerat lectus a, aliquet ante. Pellentesque eget tincidunt dui. Sed ultrices quam erat, in iaculis velit aliquam id. Cras egestas ipsum id tellus pretium scelerisque. Cras ultrices mauris vitae pharetra facilisis. Maecenas...",
-    image: "/blog/blog1.jpg?height=400&width=600",
-    categories: ["BLOG", "FASHION", "HINT", "KIDS", "WOMEN"],
-    author: "Hint Websolution",
-    date: "June 7, 2023",
-    comments: 0,
-    slug: "maecenas-bibendum-elementum-ante",
-  },
-  {
-    id: "3",
-    title: "Viverra Ex Magna A Augue",
-    excerpt:
-      "Etiam hendrerit turpis et magna faucibus bibendum. Integer imperdiet risus vitae est rutrum pretium. Cras convallis nibh ut lorem tempor, vel cursus nulla dignissim. Mauris facilisis magna vel nunc tempor...",
-    image: "/blog/blog2.jpg?height=400&width=600",
-    categories: ["BLOG", "HINT", "WOMEN"],
-    author: "Hint Websolution",
-    date: "June 5, 2023",
-    comments: 2,
-    slug: "viverra-ex-magna-a-augue",
-  },
-  {
-    id: "4",
-    title: "Fashion Trends for Summer 2024",
-    excerpt:
-      "Discover the hottest fashion trends that will dominate this summer. From vibrant colors to sustainable fabrics, explore what's trending in the fashion world and how to incorporate these styles into your wardrobe...",
-    image: "/blog/blog4.jpg?height=400&width=600",
-    categories: ["FASHION", "BLOG", "WOMEN"],
-    author: "Hint Websolution",
-    date: "June 3, 2023",
-    comments: 5,
-    slug: "fashion-trends-summer-2024",
-  },
-]
+import Link from "next/link";
+import Image from "next/image";
+import { Calendar, User, MessageCircle } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { newsArticles } from "@/utils/newsArticle";
 
 const getCategoryColor = (category: string) => {
   const colors: { [key: string]: string } = {
@@ -73,9 +11,9 @@ const getCategoryColor = (category: string) => {
     KIDS: "bg-green-100 text-green-700",
     WOMEN: "bg-pink-100 text-pink-700",
     FASHION: "bg-orange-100 text-orange-700",
-  }
-  return colors[category] || "bg-gray-100 text-gray-700"
-}
+  };
+  return colors[category] || "bg-gray-100 text-gray-700";
+};
 
 export function NewsContent() {
   return (
@@ -90,7 +28,9 @@ export function NewsContent() {
       </nav>
 
       {/* Page Title */}
-      <h1 className="text-5xl font-bold text-center text-gray-900 mb-16">News</h1>
+      <h1 className="text-5xl font-bold text-center text-gray-900 mb-16">
+        News
+      </h1>
 
       {/* Articles Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
@@ -119,7 +59,9 @@ export function NewsContent() {
                   <Badge
                     key={category}
                     variant="secondary"
-                    className={`text-xs font-medium px-2 py-1 ${getCategoryColor(category)}`}
+                    className={`text-xs font-medium px-2 py-1 ${getCategoryColor(
+                      category
+                    )}`}
                   >
                     {category}
                   </Badge>
@@ -134,7 +76,9 @@ export function NewsContent() {
               </Link>
 
               {/* Excerpt */}
-              <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">{article.excerpt}</p>
+              <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                {article.excerpt}
+              </p>
 
               {/* Meta Information */}
               <div className="flex items-center justify-between text-sm text-gray-500">
@@ -165,5 +109,5 @@ export function NewsContent() {
         </button>
       </div>
     </div>
-  )
+  );
 }

@@ -1,132 +1,46 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Minus, Plus, Facebook, Twitter, Instagram } from "lucide-react"
-import { CommentsSection } from "@/components/comments-section"
-import { ProductSuggestions } from "@/components/product-suggestions"
-
-interface Product {
-  id: string
-  name: string
-  category: string
-  price: number
-  originalPrice?: number
-  image: string
-  images: string[]
-  colors: string[]
-  sizes: string[]
-  onSale: boolean
-  isNew?: boolean
-  sku: string
-  stock: number
-  vendor: string
-  type: string
-  description: string
-  tags: string[]
-}
-
-// Mock product data - in real app this would come from API
-const products: Product[] = [
-  {
-    id: "1",
-    name: "Drawstrings Closure Solid Nylon Shapewear",
-    category: "Dress",
-    price: 150.0,
-    originalPrice: 375.0,
-    image: "/placeholder.svg?height=600&width=400",
-    images: [
-      "/placeholder.svg?height=600&width=400",
-      "/placeholder.svg?height=600&width=400",
-      "/placeholder.svg?height=600&width=400",
-      "/placeholder.svg?height=600&width=400",
-    ],
-    colors: ["black", "white", "gray"],
-    sizes: ["XL", "L", "M", "S"],
-    onSale: true,
-    sku: "DCS123456",
-    stock: 15,
-    vendor: "self",
-    type: "dress",
-    description: "Premium quality shapewear with drawstring closure for perfect fit.",
-    tags: ["Black", "White", "Gray", "XL", "L", "M", "S"],
-  },
-  {
-    id: "2",
-    name: "FITNESS Women, Unisex, Men Shapewear",
-    category: "Cotton",
-    price: 188.0,
-    originalPrice: 225.0,
-    image: "/placeholder.svg?height=600&width=400",
-    images: [
-      "/placeholder.svg?height=600&width=400",
-      "/placeholder.svg?height=600&width=400",
-      "/placeholder.svg?height=600&width=400",
-      "/placeholder.svg?height=600&width=400",
-    ],
-    colors: ["black", "white", "green", "red"],
-    sizes: ["XL", "L", "M", "S"],
-    onSale: true,
-    sku: "FIT789012",
-    stock: 8,
-    vendor: "self",
-    type: "cotton",
-    description: "Versatile fitness wear suitable for all genders and activities.",
-    tags: ["Black", "White", "Green", "Red", "XL", "L", "M", "S"],
-  },
-  {
-    id: "3",
-    name: "Jegging For Girls",
-    category: "Cotton",
-    price: 488.0,
-    image: "/placeholder.svg?height=600&width=400",
-    images: [
-      "/placeholder.svg?height=600&width=400",
-      "/placeholder.svg?height=600&width=400",
-      "/placeholder.svg?height=600&width=400",
-      "/placeholder.svg?height=600&width=400",
-    ],
-    colors: ["black", "pink", "green", "red"],
-    sizes: ["XL", "L", "M", "S"],
-    onSale: false,
-    sku: "789654123",
-    stock: 20,
-    vendor: "self",
-    type: "cotton",
-    description:
-      "Comfortable and stylish jeggings perfect for everyday wear. Made from premium cotton blend for ultimate comfort and durability.",
-    tags: ["Black", "Green", "L", "M", "Pink", "Red", "S", "Xl"],
-  },
-]
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Minus, Plus, Facebook, Twitter, Instagram } from "lucide-react";
+import { CommentsSection } from "@/components/comments-section";
+import { ProductSuggestions } from "@/components/product-suggestions";
+import { Product, products } from "@/utils/product";
 
 const getProduct = (id: string): Product | null => {
-  return products.find((product) => product.id === id) || null
-}
+  return products.find((product) => product.id === id) || null;
+};
 
 interface ProductDetailProps {
-  productId: string
+  productId: string;
 }
 
 export function ProductDetail({ productId }: ProductDetailProps) {
-  const product = getProduct(productId)
-  const [selectedColor, setSelectedColor] = useState("")
-  const [selectedSize, setSelectedSize] = useState("")
-  const [quantity, setQuantity] = useState(1)
+  const product = getProduct(productId);
+  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedSize, setSelectedSize] = useState("");
+  const [quantity, setQuantity] = useState(1);
 
   if (!product) {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="text-center py-16">
-          <h1 className="text-2xl font-bold text-gray-800 mb-4">Product Not Found</h1>
-          <p className="text-gray-600 mb-8">The product you're looking for doesn't exist.</p>
+          <h1 className="text-2xl font-bold text-gray-800 mb-4">
+            Product Not Found
+          </h1>
+          <p className="text-gray-600 mb-8">
+            The product you're looking for doesn't exist.
+          </p>
           <Link href="/catalog">
-            <Button className="bg-slate-800 hover:bg-slate-700 text-white">Back to Catalog</Button>
+            <Button className="bg-slate-800 hover:bg-slate-700 text-white">
+              Back to Catalog
+            </Button>
           </Link>
         </div>
       </div>
-    )
+    );
   }
 
   const getColorClass = (color: string) => {
@@ -142,9 +56,9 @@ export function ProductDetail({ productId }: ProductDetailProps) {
       yellow: "bg-yellow-500",
       orange: "bg-orange-500",
       brown: "bg-amber-700",
-    }
-    return colorMap[color] || "bg-gray-400"
-  }
+    };
+    return colorMap[color] || "bg-gray-400";
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -174,11 +88,15 @@ export function ProductDetail({ productId }: ProductDetailProps) {
         {/* Product Info */}
         <div className="space-y-6">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">{product.name}</h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              {product.name}
+            </h1>
             <p className="text-gray-600">SKU:{product.sku}</p>
           </div>
 
-          <div className="text-3xl font-bold text-gray-900">£{product.price.toFixed(2)} GBP</div>
+          <div className="text-3xl font-bold text-gray-900">
+            £{product.price.toFixed(2)} GBP
+          </div>
 
           {/* Color Selection */}
           <div>
@@ -188,7 +106,9 @@ export function ProductDetail({ productId }: ProductDetailProps) {
                 <button
                   key={color}
                   className={`w-10 h-10 rounded-sm ${getColorClass(color)} ${
-                    selectedColor === color ? "ring-2 ring-slate-700 ring-offset-2" : ""
+                    selectedColor === color
+                      ? "ring-2 ring-slate-700 ring-offset-2"
+                      : ""
                   }`}
                   onClick={() => setSelectedColor(color)}
                 />
@@ -234,7 +154,12 @@ export function ProductDetail({ productId }: ProductDetailProps) {
                 <Minus className="h-4 w-4" />
               </Button>
               <span className="w-12 text-center font-medium">{quantity}</span>
-              <Button variant="outline" size="icon" onClick={() => setQuantity(quantity + 1)} className="h-10 w-10">
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => setQuantity(quantity + 1)}
+                className="h-10 w-10"
+              >
                 <Plus className="h-4 w-4" />
               </Button>
             </div>
@@ -242,7 +167,9 @@ export function ProductDetail({ productId }: ProductDetailProps) {
 
           {/* Action Buttons */}
           <div className="space-y-3">
-            <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white h-12 text-lg">Add To Cart</Button>
+            <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white h-12 text-lg">
+              Add To Cart
+            </Button>
             <Button variant="outline" className="w-full h-12 text-lg">
               Buy It Now
             </Button>
@@ -268,15 +195,24 @@ export function ProductDetail({ productId }: ProductDetailProps) {
 
           {/* Social Share */}
           <div className="flex space-x-2 pt-4">
-            <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white">
+            <Button
+              size="sm"
+              className="bg-blue-600 hover:bg-blue-700 text-white"
+            >
               <Facebook className="h-4 w-4 mr-1" />
               Share
             </Button>
-            <Button size="sm" className="bg-blue-400 hover:bg-blue-500 text-white">
+            <Button
+              size="sm"
+              className="bg-blue-400 hover:bg-blue-500 text-white"
+            >
               <Twitter className="h-4 w-4 mr-1" />
               Tweet
             </Button>
-            <Button size="sm" className="bg-pink-600 hover:bg-pink-700 text-white">
+            <Button
+              size="sm"
+              className="bg-pink-600 hover:bg-pink-700 text-white"
+            >
               <Instagram className="h-4 w-4 mr-1" />
               Pin it
             </Button>
@@ -288,7 +224,7 @@ export function ProductDetail({ productId }: ProductDetailProps) {
       <CommentsSection productId={product.id} />
 
       {/* Product Suggestions */}
-      <ProductSuggestions />
+      <ProductSuggestions currentProductId={product.id} />
     </div>
-  )
+  );
 }
